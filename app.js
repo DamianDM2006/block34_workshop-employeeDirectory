@@ -12,10 +12,15 @@ app.get("/employees", (req, res) => {
   res.send(employees);
 });
 
+app.get("/employees/random", (req, res) => {
+  const randomI = Math.floor(Math.random() * employees.length);
+  res.send(employees[randomI]);
+});
+
 app.get("/employees/:id", (req, res) => {
   const { id } = req.params;
   const employee = employees.find((e) => e.id === Number(id));
-  
+
   if (!employee) return res.status(404).send("Employee is undefined");
 
   res.send(employee);
